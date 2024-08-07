@@ -1,5 +1,5 @@
 
-%% Statrt of Program
+%% Statrt of Program 1
 clc
 clear
 close all
@@ -7,7 +7,7 @@ close all
 
 %% Read Score Data
 
-FolderAdress2 = "D:\MyWork\2-ParsCoders\TrainTest\score.xlsx";
+FolderAdress2 = "score.xlsx";
 scoreRslt = readtable(FolderAdress2,"Sheet","result");
 scoreAdd  = readtable(FolderAdress2,"Sheet","addition");
 scoreSubt = readtable(FolderAdress2,"Sheet","subtraction");
@@ -23,10 +23,10 @@ scY2   = scoreY2{:,:};
 %% Read Main Data and Select Random for Train and Test
 
 % Folder Adress
-FolderAdress  = "D:\MyWork\2-ParsCoders\TrainTest\AllData.xlsx";
+FolderAdress  = "AllData.xlsx";
 AllData = readtable(FolderAdress,"Sheet","train");
 
-FolderAdress  = "D:\MyWork\2-ParsCoders\TrainTest\AllDataForTB.xlsx";
+FolderAdress  = "AllDataForTB.xlsx";
 AllDataForTB = readtable(FolderAdress,"Sheet","train");
 
 x1 = AllData{[2:end],[1:30]};
@@ -123,8 +123,6 @@ for ii=1:numofTestData
         for jj=1:length(loc1)
             if(scRslt(loc1(jj),2)==predicted_values_32_tst(ii))
                 loc2 = jj;
-            else
-                loc2 = 0;
             end
         end
         if loc2>0
@@ -223,13 +221,13 @@ fprintf('Train Error is: %.5f      %.5f \nTest Error is:  %.5f      %.5f',total_
 fprintf('\n\nExact:          %.2f %%      %.2f %%  \nAcceptable:     %.2f %%      %.2f %%\nOut of Range:   %.2f %%      %.2f %%\n',100*length(d31)/length(a31),100*length(d32)/length(a32),100*(length(b31)+length(c31))/length(a31),100*(length(b32)+length(c32))/length(a32),100*(length(e31)+length(f31))/length(a31),100*(length(e32)+length(f32))/length(a32));
 fprintf('************************************\n');
 fprintf('Rating Results:\n\n');
-fprintf('Rate Y1:          %.0f\n',sum(rateY1));
-fprintf('Rate Y2:          %.0f\n',sum(rateY2));
-fprintf('Rate Result:      %.0f\n',sum(Rslt));
-fprintf('Rate Addition:    %.0f\n',sum(Addition));
-fprintf('Rate Subtraction: %.0f\n',sum(Subtraction));
-fprintf('----------------------\n');
-fprintf('Rate Total:       %.0f\n',sum(rateY1)+sum(rateY2)+sum(Rslt)+ sum(Addition)+sum(Subtraction));
+fprintf('Rate Y1:          %.0f      %.2f %%\n',sum(rateY1),100*length(find(rateY1~=0))/length(rateY1));
+fprintf('Rate Y2:          %.0f      %.2f %%\n',sum(rateY2),100*length(find(rateY2~=0))/length(rateY2));
+fprintf('Rate Result:      %.0f      %.2f %%\n',sum(Rslt),100*length(find(Rslt~=0))/length(Rslt));
+fprintf('Rate Addition:    %.0f      %.2f %%\n',sum(Addition),100*length(find(Addition~=0))/length(Addition));
+fprintf('Rate Subtraction: %.0f      %.2f %%\n',sum(Subtraction),100*length(find(Subtraction~=0))/length(Subtraction));
+fprintf('----------------------------------\n');
+fprintf('Rate Total:       %.0f      %.2f %%\n',sum(rateY1)+sum(rateY2)+sum(Rslt)+ sum(Addition)+sum(Subtraction), sum(100*length(find(rateY1~=0))/length(rateY1)+100*length(find(rateY2~=0))/length(rateY2)+100*length(find(Rslt~=0))/length(Rslt)+100*length(find(Addition~=0))/length(Addition)+100*length(find(Subtraction~=0))/length(Subtraction))/5);
 
 figure(2)
 subplot(2,2,1);
